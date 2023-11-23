@@ -1,4 +1,4 @@
-# FH Burgenland Thesis Book LaTeX template
+# FH Burgenland Master Thesis LaTeX template
 
 ## Overview
 
@@ -46,12 +46,12 @@ Adapt it to your needs and the resulting PDF will get the defined name.
 
 ### **Versioning**
 
-The `section/versinfo.tex` file contains version details. To incorporate it in another `.tex` file, use:
+The `01_data/versinfo.tex` file contains version details. To incorporate it in another `.tex` file, use:
 ```latex
 % package required to get current date/time
 \usepackage{datetime2}
 % import the required file
-\input{section/versinfo.tex}
+\input{01_data/versinfo.tex}
 % command which actually writes the version information
 \docversion
 ```
