@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage[paperheight=16cm, paperwidth=12cm,includehead,nomarginpar,textwidth=10cm,headheight=10mm,]{geometry}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{datetime2}
+\input{data/versinfo.tex}
+\input{data/docdata.tex}
+
+\hypersetup{
+    pdftitle={\myTitle},
+    pdfsubject={\mySubject},
+    pdfauthor={\myNameInclTitle},
+    breaklinks, % permits line breaks for long links
+    bookmarksnumbered,        % ... and include section numbers
+    linktocpage,        % "make page number, not text, be link on TOC ..."
+    colorlinks,            % yes ...
+    linkcolor=black,        % normal internal links;
+    anchorcolor=black,   
+    citecolor=black,
+    urlcolor=blue,        % quite common
+    pdfstartview={Fit},        % "Fit" fits the page to the window
+    pdfpagemode=UseOutlines,    % open bookmarks in Acrobat
+    plainpages=false,      % avoids duplicate page number problem
+    pdflang={\PDFdocumentLang},
+    pdfkeywords={\docversion}
+}
+
+\begin{document}
+% Set the page style to "fancy"...
+\pagestyle{fancy}
+\title{\myTitle}
+\author{\myNameInclTitle}
+\date{\docversion}
+\fancyhf{} % clear existing header/footer entries
+% We don't need to specify the O coordinate
+\fancyhead[R]{Hello}
+\fancyfoot[L]{\thepage}
+\fancyfoot[C]{\docversion}
+\maketitle
+\section{Introduction}
+This is generated from demo.tex. demo.tex can be safely removed.\\\\
+The upload to github releases is done automatically only from main.tex/.pdf when you create and publish a release.\\\\
+So create a main.tex and you are good to go.
+\newpage
+\section{Continued...}
+\end{document}
+% original example from overleaf.com
