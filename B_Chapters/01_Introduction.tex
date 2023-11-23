@@ -1,0 +1,181 @@
+
+\chapter{Introduction}
+Welcome to the \LaTeX{} template prepared for the Computer Science department at the university of applied sciences of Burgenland\footnote{\url{https://www.fh-burgenland.at/en/information-technology/about-the-department/}}. 
+
+Introduction, Problem, Objective, Demarcation, Question, Method, and a description of the overall structure should go into this chapter.
+
+\section{Instruction included in the original FHBgld word processor template}
+\subsection{Problem stating[!]}
+In der Problemstellung erfolgt eine Hinführung zum Thema aus dem globalen
+Zusammenhang heraus betrachtet: Warum es wichtig ist, sich mit dem konkreten
+Thema zu beschäftigen bzw. welche Bedeutung hat dieses Thema zum Beispiel für die
+Wirtschaft, Gesellschaft und Umwelt.
+\subsection{Research question and added value}
+Hier werden die konkrete(n)wissenschaftliche(n) Fragestellung(en) klar angeführt.
+Neben dem inhaltlichen Ziel der Arbeit wird fallweise auch angegeben, wie
+vorgegangen wird, um die Fragestellung zu bearbeiten (z.B. mit einem Online-
+Fragebogen). Auch die Zielgruppe der Arbeit und der für die Zielgruppe angestrebte
+Nutzen kann an dieser Stelle angeführt werden.
+Anmerkung:
+Die Erfahrung zeigt, dass es hilfreich ist, das erste Einleitungskapitel an die Betreuerin
+/ an den Betreuer zu schicken und Feedback dazu zu erhalten.
+Bitte auch darauf achten, dass alle Absatz-Abstände gleich groß sind.
+Jedes Kapitel sollte mit einem Satz beginnen und einem Satz enden und ca. mind. 1⁄2
+A4-Seite umfassen.
+
+\section{Using the \LaTeX{} template}
+
+Everything in the template revolves around the\verb|main.tex| file. Here all the other files are put together to create the thesis.
+There are three different sections to consider: 
+\begin{itemize}
+	\item Front Matter,
+	\item Chapters, and
+	\item Back Matter.
+\end{itemize}
+Each section has a folder where you can put the different parts of your thesis. In the Front Matter section you should put everything that comes before your first chapter of the thesis. Respectively, in the Back Matter section you put everything that comes after your last chapter. And finally all the chapters are put into the Chapters folder. You can put things like abstract, summaries, etc... wherever they suit your thesis. In the end it really only matters how you add them into your \verb|main.tex| file. With the \verb|\input{}| command you can add the parts if they should appear in your thesis, the order within the \verb|main.tex| also determines the order in the final pdf.
+
+\subsection{Title-page}
+The Layout of the Title-page is in the \verb|FHBgld_Thesis.cls|, normally it remains unchanged. You can use all the commands as seen in the \verb|Titlepage.tex|. 
+
+The template and also the titlepage is based on the scrbook class. So if you want to use a different class without changing the title page in the \verb|FHBgld_Thesis.cls|, it is recommended creating the title page separately and then include the compiled pdf file here, using the 
+\verb|\includepdf{<filename>}| from the \verb|pdfpages| package. Alternatively, you may use the word template for the title- page and add it using this package. In that way you can avoid any differences to the original title page template. The word templates can be found here:
+\begin{enumerate}
+	\item \url{https://moodle.fh-burgenland.at/pluginfile.php/34046/mod_folder/content/0/03_Vorlage_zur_Erstellung_wissenschaftlicher_Arbeiten\%20V2.8.docx?forcedownload=1}
+	\item \url{https://moodle.fh-burgenland.at/pluginfile.php/34046/mod_folder/content/0/03_Vorlage_zur_Erstellung_wissenschaftlicher_Arbeiten\%20V2.8\%20eng.docx?forcedownload=1}
+\end{enumerate}
+
+If you use the \verb|includepdf| package make sure that the pdf still has the correct metadata afterwards.
+
+\subsection{Citing}
+As per requirement of the FH Burgenland, the template class is configured for APA\footnote{\url{https://ctan.org/pkg/biblatex-apa?lang=en}} style: \verb|[natbib=true, backend=biber, style=apa, sorting=nty]|. It uses Biblatex and the Biber backend. The location of the bibliography file is defined in the \verb|main.tex|. Citation xamples:
+\begin{itemize}
+	\item \verb|\parencite{bibid}| provides \parencite{lamport94}
+	\item \verb|\parencite[p. 123ff]{bibid}| provides \parencite[p. 123ff]{lamport94}
+	\item \verb|\parencite{lamport94,talbot2013using}| provides \parencite{lamport94,talbot2013using}
+\end{itemize}
+
+\subsection{Temporary packages and settings}
+Some packages and settings are included to make creating your thesis easier, e.g. FixMe.
+Before building your final PDF, those should be removed. Use \verb|grep -r RMF *| in the root folder of the template to find the packages and settings that should be removed.
+
+\section{Creating the pdf}
+To create a proper pdf file of your thesis there are some things to consider
+
+\subsection{PDF build}
+The script \verb|build.sh| is provided to compile the thesis in four steps:
+\begin{enumerate}
+	\item pdflatex main.tex
+	\item biber main
+	\item bib2gls main
+	\item pdflatex main.tex
+\end{enumerate}
+\verb+bib2gls+ is used to prepare the indexes for glossaries and acronyms. Both are edited in \verb|defns.bib|, therefore, Jabref can be used to manage entries. 
+
+In case you already have your definitions in \LaTeX{} format, such as
+\begin{itemize}
+	\item \verb|\newacronym{gcd}{GCD}{Greatest Common Divisor}}|, or
+	\item \verb|\newglossaryentry{latex}{name=latex,description={Is a mark up language specially suited for scientific documents}}|
+\end{itemize}
+use \verb|convertgls2bib defns.tex defns.bib| to convert from \LaTeX{} to Bibtex.
+
+\subsection{Embed all fonts in pdf}
+Please make sure that you embed all fonts in your pdf. Also make sure all the fonts of any figures that were used in the document are embedded. 
+If you don't use any pdf figures, pdfLaTeX should embed all fonts automatically.
+
+\subsubsection{Linux}
+On Linux you can use the command \begin{verbatim}
+	pdffonts my_file.pdf
+\end{verbatim}
+to check if the fonts are embbeded. Check if all the fonts listed have a "yes" in the "emb" column. 
+\begin{verbatim}
+name                                 type              encoding         emb sub uni 
+------------------------------------ ----------------- ---------------- --- --- --- 
+BXJBCJ+NimbusSanL-Bold               Type 1            Custom           yes yes no     
+HEMYJL+NimbusSanL-Regu               Type 1            Custom           yes yes no     
+OOJWDR+SFRM1000                      Type 1            Custom           yes yes no      
+OHLNOC+SFRM0900                      Type 1            Custom           yes yes no   
+...
+\end{verbatim}
+For more information see 
+
+\url{https://www.karlrupp.net/2016/01/embed-all-fonts-in-pdfs-latex-pdflatex/}
+\subsubsection{Windows}
+On Windows using the Adobe Acrobat Reader the fonts can be found at
+\begin{verbatim}
+	File > Properties > Fonts
+\end{verbatim}
+For more information please consult
+\begin{enumerate}
+	\item \url{https://helpx.adobe.com/acrobat/using/pdf-fonts.html}
+	
+	\item \url{https://www.overleaf.com/learn/latex/Questions/My_submission_was_rejected_by_the_journal_because_%22Font_XYZ_is_not_embedded%22._What_can_I_do%3F} 
+	\end{enumerate}
+	
+	%\subsection{Making a PDF/A-1 compatible pdf}
+	\subsection{Making a PDF}
+
+	
+	\subsubsection{validation}
+	To validate the produced PDF, you can either use the Preflight tool included in Adobe Acrobat Pro or a free online version. E.g. \url{https://www.pdf-online.com/osa/validate.aspx}.
+	Please take caution as different validation tools can report different results.
+	
+	\subsubsection{metadata}
+	There may be a section in the beginning of a .tex file where you define metadata.
+	Setting your Name, Title, Subject, Keywords and remove/add Information for example. To find out what fields are possible please check here. \url{http://texdoc.net/texmf-dist/doc/latex/pdfx/pdfx.pdf#subsection.2.3}
+	
+	A file containing the metadata (jobname.xmpdata) is created when compiling. 
+	
+	Watch out, the metadata .xmpdata file is only created one time. So if you need to update it you need to clear the cache of overleaf. Or delete the .xmpdata file. It is then recreated the next time you compile. 
+	
+	\url{https://www.overleaf.com/learn/how-to/Clearing_the_cache}
+	
+	You can check the metadata of your PDF with Acrobat Reader by going to File-> properties. Or alternatively check it with an online tool.
+	
+	\subsubsection{figures}
+	As already mentioned, make sure that all the fonts used in the pictures are included. Furthermore transparency in pictures causes issues, please convert transparent figures into their nontransparent version. 
+	
+	Using Linux the command \verb|pdfimages -list <pdf>| shows the typpe of all images used. The type should always be \verb|image| and not \verb|smask|. Check and convert these images.
+	
+	\subsubsection{color}
+	Additionally, there can be problems if figures use different color spaces. Use the same command as before and check if all images use the same color. 
+	
+	If color is really important in your work it might also be a good idea to use an ICC profile for the color. 
+	For more details about colors check \url{http://texdoc.net/texmf-dist/doc/latex/pdfx/pdfx.pdf#subsection.2.5}
+	
+	It is also possible to convert the pictures automatically using ghostscript. But always check the results manually. 
+	
+	\subsubsection{Other errors}
+	Due to the complexity of Latex files there can be many more errors that are not covered here.
+	
+	The Preflight tool included in Adobe Acrobat Pro also has the ability to fix some errors. For example EOL (End of Line) errors can be fixed with its analyize and fix option. 
+	Please also check if any of the following pages might have a solution to your problem:
+	\begin{enumerate}
+		\item \url{https://www.mathstat.dal.ca/~selinger/pdfa/}
+		\item \url{https://blog.zhaw.ch/icclab/creating-pdfa-documents-for-long-term-archiving/}
+		\item german: \url{http://kulturreste.blogspot.com/2014/06/grrrr-oder-wie-man-mit-latex-vielleicht.html}
+		\item \url{https://support.stmdocs.in/wiki/?title=Generating_PDF/A_compliant_PDFs_from_pdftex}
+		\item \url{http://texdoc.net/texmf-dist/doc/latex/pdfx/pdfx.pdf}
+	\end{enumerate}
+	
+	\subsubsection{Tagged PDF}
+	Currently with Latex it is only possible to create files that are in the PDF/A-1b format. The PDF/A-1a format required the PDF to be tagged which is currently not possible in a satisfactory way.
+	A manual tagging with Adobe Acrobat Pro is possible but not recommended.
+	
+	More information about the current status of tagged pdfs can be found here:
+	\begin{enumerate}
+		\item \url{https://umij.wordpress.com/2016/08/11/the-sad-state-of-pdf-accessibility-of-latex-documents/} 
+		\item \url{https://www.tug.org/TUGboat/tb30-2/tb95moore.pdf}
+	\end{enumerate}
+	
+	\subsection{General Remarks to create the pdf}
+	Highest priority should always be the embedding of all fonts. Further compliance with the PDF/A standards is always desired, but talk to your advisor in any case.
+	
+	Please also check the following resources if you have problems and need assistance
+	
+	\begin{enumerate}
+		\item \url{https://spl29.univie.ac.at/fileadmin/user_upload/s_spl29/Studium/abschluss_master/Infoblatt_Hochschulschriften.pdf} 
+		\item \url{https://e-theses.univie.ac.at/E-Theses_erstellen_von_pdf.pdf}
+	\end{enumerate}
+	
+	\section{Further tips on the template}
+	In the following chapters there are some general tips on the elements of Latex. You can check them out if you think they have useful information for you. Then you delete these chapters and replace them with the real chapters of your thesis.

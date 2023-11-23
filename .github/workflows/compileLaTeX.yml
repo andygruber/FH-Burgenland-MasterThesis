@@ -18,12 +18,12 @@ jobs:
       - name: Add version or PR info
         run: |
           if [[ "${{ github.event_name }}" == "release" ]]; then
-            echo '\newcommand\docversion{${{ github.event.release.tag_name }}}' > data/versinfo.tex
+            echo '\newcommand\docversion{${{ github.event.release.tag_name }}}' > 01_data/versinfo.tex
           elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            echo '\newcommand\docversion{PR\#${{ github.event.pull_request.number }}; \today\hspace{0.1cm}\DTMcurrenttime}' > data/versinfo.tex
+            echo '\newcommand\docversion{PR\#${{ github.event.pull_request.number }}; \today\hspace{0.1cm}\DTMcurrenttime}' > 01_data/versinfo.tex
           else
             SHASHORT=$(echo ${{ github.sha }} | cut -c1-7)
-            echo "\newcommand\docversion{Git-sha ${SHASHORT}; \today\hspace{0.1cm}\DTMcurrenttime}" > data/versinfo.tex
+            echo "\newcommand\docversion{Git-sha ${SHASHORT}; \today\hspace{0.1cm}\DTMcurrenttime}" > 01_data/versinfo.tex
           fi
 
       - name: Compile LaTeX document
@@ -42,13 +42,13 @@ jobs:
             fi
     
             # Generate the base name for the PDFs
-            base_name="${GITHUB_REPOSITORY##*/}"
+            # base_name="${GITHUB_REPOSITORY##*/}"
             # set base_name to custom value if required
-            # base_name='my custom pdf file name'
+            base_name='your_lastname, Insert final title here'
 
             # Add tag to file name in case of release
             if [ "$GITHUB_EVENT_NAME" == "release" ]; then
-                base_name="${base_name}_${{ github.event.release.tag_name }}"
+                base_name="${base_name}, ${{ github.event.release.tag_name }}"
             fi
     
             # If only one PDF is found, rename it
@@ -58,7 +58,7 @@ jobs:
             fi
 
             # Uncomment if there can only be 1 PDF in this repository
-            # exit 1
+            exit 1
 
             # If multiple PDFs are found, rename them with their original names appended
             for pdf in "${pdfs[@]}"; do

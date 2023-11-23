@@ -1,3 +1,4 @@
 {
-    "ltex.language": "en-US"
+    "ltex.language": "en-US",
+    "latex-workshop.latex.rootFile.indicator": "\\begin{document}"
 }

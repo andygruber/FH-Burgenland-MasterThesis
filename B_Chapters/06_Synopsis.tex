@@ -1,0 +1,45 @@
+\chapter{Synopsis}
+
+\section{Instruction included in the original FHBgld word processor template}
+Die Zusammenfassung stellt die gesamte Arbeit – von der Einleitung bis zu den Ergebnissen - in Kurzform dar. Länge maximal 1,5 - 2 Seiten. 
+
+\section{Algorithms}
+
+If you want to show algorithms in your Thesis take a look at the \url{https://www.overleaf.com/learn/latex/algorithms} page. The \verb|algorithm2e| package is already included in the template. You can list algorithms in the same way as you can list Tables and Figures.
+
+\begin{algorithm}[H]
+	\KwData{this text}
+	\KwResult{how to write algorithm with \LaTeX2e }
+	initialization\;
+	\While{not at end of this document}{
+		read current\;
+		\eIf{understand}{
+			go to next section\;
+			current section becomes this one\;
+		}{
+			go back to the beginning of current section\;
+		}
+	}
+	\caption{How to write algorithms}
+\end{algorithm}
+%\cleardoublepage{}
+
+\section{Acronyms and Glossary.}
+
+if you want to use Acronyms or a Glossary check the page here: \url{https://www.overleaf.com/learn/latex/glossaries}
+
+The \Gls{latex} typesetting markup language is specially suitable 
+for documents that include \gls{maths}. are 
+rendered properly an easily once one gets used to the commands.
+
+Given a set of numbers, there are elementary methods to compute 
+its \glsxtrlong{gcd}, which is abbreviated \glsxtrshort{gcd}. This 
+process is similar to that used for the \glsxtrfull{lcm}.
+
+\section{Macros}
+
+You can also add useful packages or macros into the \verb|packages_macros.tex| file to add them to the project.
+The packages for algorithms, code or the glossary have already been added there.
+
+\subsection{FixMe}
+Another example, the \verb|FixMe| package, is added as well. It allows you or your supervisor to add Meta comments to the document. These comments only appear if you set the draft mode in the \verb|main.tex| file. If you remove or comment the activation of the draft mode you can see your final thesis without comments.

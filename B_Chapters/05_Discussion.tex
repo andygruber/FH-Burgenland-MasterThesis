@@ -1,0 +1,49 @@
+\chapter{Discussion of results and conclusions}
+
+Results, Discussion and conclusions come here.
+
+\section{Instruction included in the original FHBgld word processor template}
+Die Ergebnisse der Arbeit sind in übersichtlicher Form darzustellen Die gewählte Form der Darstellung ist vom gewählten Datenmaterial und den in der Einleitung gesetzten Zielen abhängig. Die Ergebnisse sind zu interpretieren und in Bezug zum Stand des Wissens zu diskutieren. Über die Beantwortung der Forschungsfrage und die daraus gezogenen Schlussfolgerungen schließt sich der Bogen zur Einleitung. 
+
+Wichtig ist die gedanklich klare Unterscheidung zwischen der Darstellung der Ergebnisse und der Interpretation/Bewertung der Ergebnisse. 
+
+\section{Code}
+If you want to show program code within your thesis you can use the \verb|\texttt{verbatim}| environment or for a more complex display take a look at \url{https://www.overleaf.com/learn/latex/Code_listing}
+
+\begin{verbatim}
+	Text enclosed inside \texttt{verbatim} environment 
+	is printed directly 
+	and all \LaTeX{} commands are ignored.
+\end{verbatim}
+
+\begin{lstlisting}[language=Python, caption=Python example]
+	import numpy as np
+	
+	def incmatrix(genl1,genl2):
+	m = len(genl1)
+	n = len(genl2)
+	M = None #to become the incidence matrix
+	VT = np.zeros((n*m,1), int)  #dummy variable
+	
+	#compute the bitwise xor matrix
+	M1 = bitxormatrix(genl1)
+	M2 = np.triu(bitxormatrix(genl2),1) 
+	
+	for i in range(m-1):
+	for j in range(i+1, m):
+	[r,c] = np.where(M2 == M1[i,j])
+	for k in range(len(r)):
+	VT[(i)*n + r[k]] = 1;
+	VT[(i)*n + c[k]] = 1;
+	VT[(j)*n + r[k]] = 1;
+	VT[(j)*n + c[k]] = 1;
+	
+	if M is None:
+	M = np.copy(VT)
+	else:
+	M = np.concatenate((M, VT), 1)
+	
+	VT = np.zeros((n*m,1), int)
+	
+	return M
+\end{lstlisting}
